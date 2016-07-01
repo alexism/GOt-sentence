@@ -18,14 +18,13 @@ $(document).ready(function() {
 
     function changeWord() {
        
-        $.get('http://'+document.location.hostname+':8080/ppf', function(data) {
+        $.get('http://'+document.location.hostname+':8080/api/sentence', function(data) {
             loaded[0] = 0;
-            $('#suggestion')[0].textContent = data['sentence'];
+            $('#suggestion')[0].textContent = data;
             clearInterval(intervalVar);
         });
     }
 
-    document.body.addEventListener("mousedown", tapOrClick, false);
     document.body.addEventListener("touchstart", tapOrClick, false);
 
     function tapOrClick(event) {
@@ -39,7 +38,7 @@ $(document).ready(function() {
 
     var down = {};
 
-    $(document).keydown(function(event){
+    $(document).keypress(function(event){
         if (down[event.which] == null) {
             changeWord();
             down[event.which] = true;
